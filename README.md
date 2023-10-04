@@ -4,10 +4,11 @@ I chose a comparison of the weather in Poland in 2022 as the topic of the projec
 ## Current Status
 This is just an early alpha version. I have a lot of things to improve, modify and implement.
 
+Whole project and data was not properly tested.
+
 
 :warning:
 I am not responsible for the consequences of using this project.
-Whole project and data was not properly tested.
 ## How To Run?
 Just start the app.py file. 
 If your IDE is not equipped with browser, visit http://localhost:54630/.
