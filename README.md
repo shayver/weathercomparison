@@ -1,5 +1,5 @@
 ## Project Overview
-With this project, I wanted to explore, learn and test Shiny For Python's data analysis capabilities.
+With this project, I wanted to explore and learn Shiny For Python's in terms of data analysis capabilities.
 I chose a comparison of the weather in Poland in 2022 as the topic of the project. This was inspired by many conflicting observations about the seasons.
 ## Current Status
 This is just an early alpha version. I have a lot of things to improve, modify and implement.
@@ -16,11 +16,17 @@ Built with Python 3.11.4
 
 
 **Libraries:**
+
 -ipyleaflet
+
 -numpy
+
 -pandas
+
 -plotly
+
 -shiny
+
 -shinywidgets
 ## Credits
 <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
