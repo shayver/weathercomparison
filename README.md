@@ -9,7 +9,7 @@ Just start the app.py file.
 If your IDE is not equipped with browser, visit http://localhost:54630/.
 # Built With & Requirements
 Built with Python 3.11.4
-## Libraries:
+**Libraries:**
 -ipyleaflet
 -numpy
 -pandas
@@ -19,7 +19,7 @@ Built with Python 3.11.4
 # License
 Weather data by Open-Meteo.com
 https://open-meteo.com/
-License:
+**License:**
 https://creativecommons.org/licenses/by/4.0/
 
 
