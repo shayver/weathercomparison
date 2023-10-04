@@ -21,6 +21,8 @@ Built with Python 3.11.4
 ## License
 Weather data by Open-Meteo.com
 https://open-meteo.com/
+
+
 **License:**
 https://creativecommons.org/licenses/by/4.0/
 
