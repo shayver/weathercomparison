@@ -24,6 +24,8 @@ Built with Python 3.11.4
 
 -pandas
 
+-pathlib
+
 -plotly
 
 -shiny
