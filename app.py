@@ -8,6 +8,7 @@ from shiny import ui, render, App, reactive
 from shinywidgets import output_widget, reactive_read, register_widget, render_widget
 import plotly.express as px
 import plotly.graph_objs as go
+from pathlib import Path
 
 # --- beginning of the calculations ---
 
@@ -15,7 +16,10 @@ season = 'spring'
 
 def csv_file_procedure():
     global df
-    df = pd.read_csv(r"C:\Users\golar\Desktop\Projekty\Weather Comparison\data\data_2022.csv", sep=';' , encoding='latin-1', decimal=',')
+
+    path = Path(__file__).parent / "./data/data_2022.csv"
+
+    df = pd.read_csv(path, sep=';' , encoding='latin-1', decimal=',')
     df['year'] = pd.DatetimeIndex(df['time']).year
     df['month'] = pd.DatetimeIndex(df['time']).month
     df['date'] = pd.DatetimeIndex(df['time']).date
@@ -292,6 +296,3 @@ def server(input, output, session):
         fig.show()
 
 app = App(app_ui, server)
-
-
-
