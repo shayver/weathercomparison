@@ -2,13 +2,10 @@
 With this project, I wanted to explore and learn Shiny For Python's in terms of data analysis capabilities.
 I chose a comparison of the weather in Poland in 2022 as the topic of the project. This was inspired by many conflicting observations about the seasons.
 ## Current Status
-This is just an early alpha version. I have a lot of things to improve, modify and implement.
-
-Whole project and data was not properly tested.
-
+This is just an early alpha version.
 
 :warning:
-I am not responsible for the consequences of using this project.
+Project and data was not properly tested. I am not responsible for the use of this project or any conclusions drawn from it.
 ## How To Run?
 Just start the app.py file. 
 If your IDE is not equipped with browser, visit http://localhost:54630/.
