@@ -8,7 +8,7 @@ This is just an early alpha version.
 Project and data was not properly tested. I am not responsible for the use of this project or any conclusions drawn from it.
 ## How To Run?
 Just start the app.py file. 
-If your IDE is not equipped with browser, visit http://localhost:54630/.
+If your IDE is not equipped with browser, visit localhost.
 ## Built With & Requirements
 Built with Python 3.11.4
 
