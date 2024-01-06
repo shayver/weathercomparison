@@ -179,7 +179,7 @@ app_ui = ui.page_fluid(
     ui.a("Weather data by Open-Meteo.com", href="https://open-meteo.com/"),
     ui.input_select("season_select", "Season", seasons),
     ui.h4("Map - Most Common Weather"),
-    ui.output_text("my_text"),
+    ui.output_text("map_subtitle"),
     output_widget("map"),
     ui.h4("Comparison"),
     ui.input_select("city1_select", "City 1", cities),
@@ -191,7 +191,7 @@ app_ui = ui.page_fluid(
 def server(input, output, session):
     @output
     @render.text
-    def my_text():
+    def map_subtitle():
         return "In 2022, " + str.capitalize(input.season_select()) + " in Poland was like:"
     
     @reactive.Effect
@@ -200,79 +200,79 @@ def server(input, output, session):
         csv_file_procedure()
         season_records()
         find_map_summary(df, season)
-        i_warsaw = DivIcon(html='<font size="1"><center><b>Warszawa</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Warszawa']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Warszawa']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_warsaw = DivIcon(html='<font size="1"><center><b>Warszawa</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Warszawa']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Warszawa']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_warsaw = Marker(location=(52.2298, 21.0118), title = "Warsaw", draggable = False, icon = i_warsaw)
 
-        i_bialystok = DivIcon(html='<font size="1"><center><b>Białystok</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Bialystok']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Bialystok']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_bialystok = DivIcon(html='<font size="1"><center><b>Białystok</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Bialystok']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Bialystok']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_bialystok = Marker(location=(53.1333, 23.1643), title = "Białystok", draggable = False, icon = i_bialystok)
         
-        i_bielsko = DivIcon(html='<font size="1"><center><b>Bielsko-Biała</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'BielskoBiala']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'BielskoBiala']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_bielsko = DivIcon(html='<font size="1"><center><b>Bielsko-Biała</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'BielskoBiala']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'BielskoBiala']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_bielsko = Marker(location=(49.8225, 19.0469), title = "Bielsko-Biała", draggable = False, icon = i_bielsko)
 
-        i_bydgoszcz = DivIcon(html='<font size="1"> <center><b>Bydgoszcz</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Bydgoszcz']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Bydgoszcz']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_bydgoszcz = DivIcon(html='<font size="1"> <center><b>Bydgoszcz</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Bydgoszcz']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Bydgoszcz']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_bydgoszcz = Marker(location=(53.1235, 18.0076), title = "Bydgoszcz", draggable = False, icon = i_bydgoszcz)
 
-        i_ciechanow = DivIcon(html='<font size="1"> <center><b>Ciechanów</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Ciechanow']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Ciechanow']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_ciechanow = DivIcon(html='<font size="1"> <center><b>Ciechanów</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Ciechanow']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Ciechanow']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_ciechanow = Marker(location=(52.8814, 20.62), title = "Ciechanów", draggable = False, icon = i_ciechanow)
 
-        i_elblag = DivIcon(html='<font size="1"> <center><b>Elbląg</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Elblag']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Elblag']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_elblag = DivIcon(html='<font size="1"> <center><b>Elbląg</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Elblag']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Elblag']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_elblag = Marker(location=(54.1522, 19.4088), title = "Elbląg", draggable = False, icon = i_elblag)
 
-        i_gdansk = DivIcon(html='<font size="1"> <center><b>Gdańsk</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Gdansk']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Gdansk']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_gdansk = DivIcon(html='<font size="1"> <center><b>Gdańsk</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Gdansk']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Gdansk']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_gdansk = Marker(location=(54.523, 18.6491), title = "Gdańsk", draggable = False, icon = i_gdansk)
 
-        i_katowice = DivIcon(html='<font size="1"> <center><b>Katowice</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Katowice']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Katowice']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_katowice = DivIcon(html='<font size="1"> <center><b>Katowice</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Katowice']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Katowice']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_katowice = Marker(location=(50.2584, 19.0275), title = "Katowice", draggable = False, icon = i_katowice)
 
-        i_krakow = DivIcon(html='<font size="1"> <center><b>Kraków</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Kraków']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Kraków']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_krakow = DivIcon(html='<font size="1"> <center><b>Kraków</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Kraków']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Kraków']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_krakow = Marker(location=(50.0614, 19.9366), title = "Kraków", draggable = False, icon = i_krakow)
 
-        i_kielce = DivIcon(html='<font size="1"> <center><b>Kielce</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Kielce']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Kielce']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_kielce = DivIcon(html='<font size="1"> <center><b>Kielce</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Kielce']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Kielce']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_kielce = Marker(location=(50.8703, 20.6275), title = "Kielce", draggable = False, icon = i_kielce)
 
-        i_koszalin = DivIcon(html='<font size="1"> <center><b>Koszalin</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Koszalin']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Koszalin']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_koszalin = DivIcon(html='<font size="1"> <center><b>Koszalin</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Koszalin']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Koszalin']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_koszalin = Marker(location=(54.1944, 16.1722), title = "Koszalin", draggable = False, icon = i_koszalin)
 
-        i_krosno = DivIcon(html='<font size="1"> <center><b>Krosno</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Krosno']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Krosno']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_krosno = DivIcon(html='<font size="1"> <center><b>Krosno</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Krosno']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Krosno']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_krosno = Marker(location=(49.6887, 21.7706), title = "Krosno", draggable = False, icon = i_krosno)
 
-        i_lodz = DivIcon(html='<font size="1"> <center><b>Łódź</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Lodz']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Lodz']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_lodz = DivIcon(html='<font size="1"> <center><b>Łódź</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Lodz']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Lodz']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_lodz = Marker(location=(51.7706, 19.4739), title = "Łódź", draggable = False, icon = i_lodz)
 
-        i_lublin = DivIcon(html='<font size="1"> <center><b>Lublin</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Lublin']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Lublin']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_lublin = DivIcon(html='<font size="1"> <center><b>Lublin</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Lublin']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Lublin']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_lublin = Marker(location=(51.25, 22.5667), title = "Lublin", draggable = False, icon = i_lublin)
 
-        i_olsztyn = DivIcon(html='<font size="1"> <center><b>Olsztyn</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Olsztyn']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Olsztyn']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_olsztyn = DivIcon(html='<font size="1"> <center><b>Olsztyn</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Olsztyn']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Olsztyn']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_olsztyn = Marker(location=(53,7799, 20.4942), title = "Olsztyn", draggable = False, icon = i_olsztyn)
 
-        i_pila = DivIcon(html='<font size="1"> <center><b>Piła</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Pila']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Pila']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_pila = DivIcon(html='<font size="1"> <center><b>Piła</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Pila']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Pila']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_pila = Marker(location=(53.1514, 16.7378), title = "Piła", draggable = False, icon = i_pila)
 
-        i_poznan = DivIcon(html='<font size="1"> <center><b>Poznań</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Poznan']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Poznan']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_poznan = DivIcon(html='<font size="1"> <center><b>Poznań</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Poznan']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Poznan']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_poznan = Marker(location=(52.4069, 16.9299), title = "Poznań", draggable = False, icon = i_poznan)
 
-        i_rzeszow = DivIcon(html='<font size="1"> <center><b>Rzeszów</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Rzeszow']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Rzeszow']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_rzeszow = DivIcon(html='<font size="1"> <center><b>Rzeszów</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Rzeszow']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Rzeszow']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_rzeszow = Marker(location=(50.0413, 21.999), title = "Rzeszów", draggable = False, icon = i_rzeszow)
 
-        i_slupsk = DivIcon(html='<font size="1"> <center><b>Słupsk</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Slupsk']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Slupsk']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_slupsk = DivIcon(html='<font size="1"> <center><b>Słupsk</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Slupsk']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Slupsk']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_slupsk = Marker(location=(54.4641, 17.0287), title = "Słupsk", draggable = False, icon = i_slupsk)
 
-        i_suwalki = DivIcon(html='<font size="1"> <center><b>Suwałki</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Suwalki']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Suwalki']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_suwalki = DivIcon(html='<font size="1"> <center><b>Suwałki</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Suwalki']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Suwalki']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_suwalki = Marker(location=(54.1118, 22.9309), title = "Suwałki", draggable = False, icon = i_suwalki)
 
-        i_szczecin = DivIcon(html='<font size="1"> <center><b>Szczecin</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Szczecin']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Szczecin']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_szczecin = DivIcon(html='<font size="1"> <center><b>Szczecin</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Szczecin']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Szczecin']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_szczecin = Marker(location=(53.4289, 14.553), title = "Szczecin", draggable = False, icon = i_szczecin)
 
-        i_torun = DivIcon(html='<font size="1"> <center><b>Toruń</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Torun']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Torun']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_torun = DivIcon(html='<font size="1"> <center><b>Toruń</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Torun']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Torun']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_torun = Marker(location=(53.0138, 18.5981), title = "Toruń", draggable = False, icon = i_torun)
 
-        i_wroclaw = DivIcon(html='<font size="1"> <center><b>Wrocław</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Wroclaw']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Wroclaw']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_wroclaw = DivIcon(html='<font size="1"> <center><b>Wrocław</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Wroclaw']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Wroclaw']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_wroclaw = Marker(location=(51.1, 17.0333), title = "Wrocław", draggable = False, icon = i_wroclaw)
 
-        i_zakopane = DivIcon(html='<font size="1"> <center><b>Zakopane</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'Zakopane']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Zakopane']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_zakopane = DivIcon(html='<font size="1"> <center><b>Zakopane</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'Zakopane']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'Zakopane']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_zakopane = Marker(location=(49.299, 19.9489), title = "Zakopane", draggable = False, icon = i_zakopane)
 
-        i_zielonagora = DivIcon(html='<font size="1"> <center><b>Zielona Góra</b><br>%s, %s&deg</center>' %((map_df.loc[map_df['city'] == 'ZielonaGora']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'ZielonaGora']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 30])
+        i_zielonagora = DivIcon(html='<font size="1"> <center><b>Zielona Góra</b><br>%s,<br>%s&deg</center>' %((map_df.loc[map_df['city'] == 'ZielonaGora']['weather'].values[0]), (map_ap_temp_df.loc[map_ap_temp_df['city'] == 'ZielonaGora']['apparent_temperature (°C)'].values[0])), bg_pos=[0, 0], icon_size=[65, 45])
         m_zielonagora = Marker(location=(51.9355, 15.5064), title = "Zielona Góra", draggable = False, icon = i_zielonagora)
 
         layer_group = LayerGroup(layers=(m_warsaw, m_bialystok, m_bielsko, m_bydgoszcz, m_ciechanow, m_elblag, m_gdansk, m_katowice, m_krakow, m_kielce, m_koszalin, m_krosno, m_lodz, m_lublin, m_olsztyn, m_pila, m_poznan, m_rzeszow, m_slupsk, m_suwalki, m_szczecin, m_torun, m_wroclaw, m_zakopane, m_zielonagora))
@@ -296,3 +296,6 @@ def server(input, output, session):
         fig.show()
 
 app = App(app_ui, server)
+
+
+
